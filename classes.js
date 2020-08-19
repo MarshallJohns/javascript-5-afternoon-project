@@ -61,7 +61,7 @@ class Employee {
 //Code Here
 
 class Manager extends Employee {
-  constructor(first_name, last_name, email, age, reports){
+  constructor(first_name, last_name, email, age){
   super(first_name, last_name, email, age)
     this.reports = []
   
@@ -121,7 +121,7 @@ hire(employee){
   } else if(this.reports.length > 100){
     this.title = 'Bestest Manager'
   }
-  return this.employee
+  
 }
 
 fire(index){
@@ -157,12 +157,31 @@ fire(index){
 //Code Here
 
 class Machine {
-  widgets_made_count = 0
-  wear_and_tear_count = 0
-  needs_reboot = false
+  constructor(){
+  this.widgets_made_count = 0
+  this.wear_and_tear_count = 0
+  this.needs_reboot = false
+  }
 
-  makeWidget(num){
-    widgets_made_count + num
-  
+  makeWidgets(num){
+    this.widgets_made_count += num
+    this.wear_and_tear_count = this.widgets_made_count / 50
+  }
+
+  fixMachine(){
+    this.needs_reboot = true
+  }
+
+  reboot(){
+    return () =>{
+      this.wear_and_tear_count -= 10
+      this.needs_reboot = false
+    }
   }
 }
+
+let baler = new Machine()
+
+let rebootBaler = baler.reboot()
+
+rebootBaler()
